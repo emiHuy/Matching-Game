@@ -1,9 +1,7 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -13,6 +11,11 @@ public class Main implements ActionListener{
     private JButton Button;
     private JLabel Label;
     private JPanel Panel;
+
+    public Main(){
+        
+
+    }
 
     public static void main(String[] args) {
 
