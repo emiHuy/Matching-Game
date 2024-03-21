@@ -18,7 +18,7 @@ public class Main implements ActionListener{
         frame = new JFrame();
         label = new JLabel("something for testing");
         panel = new JPanel();
-            panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
+            panel.setBorder(BorderFactory.createEmptyBorder(100,540,800,540));
             panel.setName("Card Game");
             panel.add(label);
 
