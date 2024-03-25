@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,12 +13,15 @@ public class JavaGUI extends JFrame{
     private JLabel highscoreDisplay;
     private JLabel highScoreValue;
     private JLabel gameTitle;
+    private JPanel aboutScreen;
+    private JTextPane HEYYTextPane;
+    private JButton backButton;
 
     public JavaGUI(){
         JFrame displayStart = new JFrame();
         displayStart.add(mainPanel);
         displayStart.setTitle("Card Matching Game");
-        displayStart.setSize(1200, 800);
+        displayStart.setSize(2000, 1100);
         displayStart.setVisible(true);
         displayStart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -36,8 +38,9 @@ public class JavaGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainPanel.setVisible(false);
+                displayStart.add(aboutScreen);
+                aboutScreen.setVisible(true);
                 displayStart.setVisible(true);
-
             }
         });
 
@@ -45,7 +48,7 @@ public class JavaGUI extends JFrame{
         instructionsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new instructionsPage();
             }
         });
 
@@ -66,6 +69,13 @@ public class JavaGUI extends JFrame{
                 if(quitResponse == JOptionPane.YES_OPTION){
                     displayStart.dispose();
                 }
+            }
+        });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.setVisible(true);
+                aboutScreen.setVisible(false);
             }
         });
     }
