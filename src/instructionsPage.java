@@ -18,6 +18,7 @@ public class instructionsPage extends JFrame{
         instructions.setLocationRelativeTo(null);
         instructions.setVisible(true);
         instructions.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         Back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

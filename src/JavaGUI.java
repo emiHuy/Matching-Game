@@ -15,7 +15,10 @@ public class JavaGUI extends JFrame{
     private JLabel gameTitle;
     private JPanel aboutScreen;
     private JTextPane HEYYTextPane;
-    private JButton backButton;
+    private JButton backButtonAbout;
+    private JPanel scoresList;
+    private JLabel scoresHead;
+    private JButton backButtonScores;
 
     public JavaGUI(){
         JFrame displayStart = new JFrame();
@@ -25,25 +28,28 @@ public class JavaGUI extends JFrame{
         displayStart.setVisible(true);
         displayStart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        displayStart.add(aboutScreen);
+        aboutScreen.setVisible(false);
+
+        displayStart.add(scoresList);
+        scoresList.setVisible(false);
+
         // when play button is clicked
         playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new gameScreen();
+                displayStart.dispose();
             }
         });
-
         // when about button is clicked
         aboutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainPanel.setVisible(false);
-                displayStart.add(aboutScreen);
                 aboutScreen.setVisible(true);
-                displayStart.setVisible(true);
             }
         });
-
         // when instructions button is clicked
         instructionsButton.addActionListener(new ActionListener() {
             @Override
@@ -51,15 +57,14 @@ public class JavaGUI extends JFrame{
                 new instructionsPage();
             }
         });
-
         // when scores button is clicked
         scoresButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                mainPanel.setVisible(false);
+                scoresList.setVisible(true);
             }
         });
-
         // when quit button is clicked
         quitButton.addActionListener(new ActionListener() {
             @Override
@@ -71,14 +76,21 @@ public class JavaGUI extends JFrame{
                 }
             }
         });
-        backButton.addActionListener(new ActionListener() {
+        // goes to starting screen when back button is clicked
+        backButtonAbout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainPanel.setVisible(true);
                 aboutScreen.setVisible(false);
             }
         });
+        // goes to starting screen when back button is clicked
+        backButtonScores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.setVisible(true);
+                scoresList.setVisible(false);
+            }
+        });
     }
-
-
 }
