@@ -19,6 +19,7 @@ public class JavaGUI extends JFrame{
     private JPanel scoresList;
     private JLabel scoresHead;
     private JButton backButtonScores;
+    private JLabel aboutHead;
 
     public JavaGUI(){
         JFrame displayStart = new JFrame();

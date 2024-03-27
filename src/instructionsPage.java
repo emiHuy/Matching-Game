@@ -3,9 +3,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class instructionsPage extends JFrame{
-    private JTextArea instructionText;
     private JButton backButton;
     private JPanel instructionPanel;
+    private JLabel instructionsHead;
+    private JTextPane instructionText;
 
     public instructionsPage(){
         instructionSetup();
