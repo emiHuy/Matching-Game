@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 public class instructionsPage extends JFrame{
     private JTextArea instructionText;
-    private JButton Back;
+    private JButton backButton;
     private JPanel instructionPanel;
 
     public instructionsPage(){
@@ -19,7 +19,7 @@ public class instructionsPage extends JFrame{
         instructions.setVisible(true);
         instructions.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        Back.addActionListener(new ActionListener() {
+        backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 instructions.dispose();
