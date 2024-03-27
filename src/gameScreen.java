@@ -4,91 +4,90 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 
-public class gameScreen extends javax.swing.JFrame{
-    private JPanel gamePanel;
-    private JLabel grid1 = new JLabel("");
-    private JLabel grid2 = new JLabel("");
-    private JLabel grid3 = new JLabel("");
-    private JLabel grid4 = new JLabel("");
-    private JLabel grid5 = new JLabel("");
-    private JLabel grid6 = new JLabel("");
-    private JLabel grid7 = new JLabel("");
-    private JLabel grid8 = new JLabel("");
-    private JLabel grid9 = new JLabel("");
-    private JLabel grid10 = new JLabel("");
-    private JLabel grid11 = new JLabel("");
-    private JLabel grid12 = new JLabel("");
+public class gameScreen extends javax.swing.JFrame implements ActionListener{
     private JButton backButton;
-    private JMenu instructionMenu;
+    private JFrame gameFrame;
     private JMenuItem openInstructions;
-    private JLabel cardback = new JLabel(new ImageIcon("cardback.png"));
-    private JLabel circleCard = new JLabel(new ImageIcon("circle card.png"));
-    private JLabel clubCard = new JLabel(new ImageIcon("club card.png"));
-    private JLabel diamondCard = new JLabel(new ImageIcon("diamond card.png"));
-    private JLabel spadeCard = new JLabel(new ImageIcon("spade card.png"));
-    private JLabel squareCard = new JLabel(new ImageIcon("square card.png"));
-    private JLabel starCard = new JLabel(new ImageIcon("star card.png"));
-    private JLabel[] grids;
-    private GridBagConstraints gbc;
-    private GridBagConstraints buttonConstraints;
+    private JPanel gamePanel;
+    private JLabel grid1;
+    private JLabel grid2;
+    private JLabel grid3;
+    private JLabel grid4;
+    private JLabel grid5;
+    private JLabel grid6;
+    private JLabel grid7;
+    private JLabel grid8;
+    private JLabel grid9;
+    private JLabel grid10;
+    private JLabel grid11;
+    private JLabel grid12;
+    private final ImageIcon cardBack = new ImageIcon("cardback.png");
+    private final ImageIcon circleCard = new ImageIcon("circle card.png");
+    private final ImageIcon clubCard = new ImageIcon("club card.png");
+    private final ImageIcon diamondCard = new ImageIcon("diamond card.png");
+    private final ImageIcon spadeCard = new ImageIcon("spade card.png");
+    private final ImageIcon squareCard = new ImageIcon("square card.png");
+    private final ImageIcon starCard = new ImageIcon("star card.png");
+    private final JLabel[] grids = {grid1, grid2, grid3, grid4, grid5, grid6, grid7, grid8, grid9, grid10, grid11, grid12};
 
     public gameScreen(){
         gameSetup();
     }
+
     private void gameSetup(){
-        JFrame gameFrame = new JFrame();
+        gameFrame = new JFrame();
         gameFrame.setTitle("Card Matching Game");
         gameFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel borderPanel = new JPanel(new BorderLayout());
         gameFrame.add(borderPanel);
 
-
         gamePanel = new JPanel();
         gamePanel.setLayout(new GridLayout(3,4,10,10));
 
         menuSetup(gameFrame);
 
-        grids = new JLabel[]{grid1, grid2, grid3, grid4, grid5, grid6, grid7, grid8, grid9, grid10, grid11, grid12};
+        // display cards
         for(int i = 0; i<grids.length; i++){
-            grids[i] = new JLabel(new ImageIcon("cardback.png"));
+            grids[i] = new JLabel(cardBack);
             gamePanel.add(grids[i]);
         }
+        borderPanel.add(gamePanel, BorderLayout.CENTER);
 
+        // add back button
         JPanel buttonPanel = new JPanel();
         backButton = new JButton("Back");
+        backButton.addActionListener(this);
         buttonPanel.add(backButton);
         borderPanel.add(buttonPanel,BorderLayout.SOUTH);
 
-        borderPanel.add(gamePanel, BorderLayout.CENTER);
-
         gameFrame.setSize(2000, 1100);
         gameFrame.setVisible(true);
-
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int confirmBack = JOptionPane.showConfirmDialog(null, "Are you sure you want to go back? Game will not save.", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (confirmBack == JOptionPane.YES_OPTION){
-                    gameFrame.dispose();
-                    new JavaGUI();
-                }
-            }
-        });
     }
-    private void menuSetup(JFrame frame){
-        // creates instructions menu that allows user to open instructions mid-game
-        instructionMenu = new JMenu("Menu");
+
+    private void menuSetup(JFrame frame) {
+        JMenu instructionMenu = new JMenu("Menu");
         JMenuBar menuBar = new JMenuBar();
         openInstructions = new JMenuItem("Instructions");
-        openInstructions.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new instructionsPage();
-            }
-        });
+        openInstructions.addActionListener(this);
         instructionMenu.add(openInstructions);
         menuBar.add(instructionMenu);
         frame.setJMenuBar(menuBar);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == backButton) {
+            // ask for user confirmation
+            int confirmBack = JOptionPane.showConfirmDialog(null, "Are you sure you want to go back? Game will not save.", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirmBack == JOptionPane.YES_OPTION){
+                // go back to starting menu
+                gameFrame.dispose();
+                new JavaGUI();
+            }
+        }
+        else if(e.getSource() == openInstructions) {
+            new instructionsPage();
+        }
     }
 }
