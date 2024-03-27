@@ -61,7 +61,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         buttonPanel.add(backButton);
         borderPanel.add(buttonPanel,BorderLayout.SOUTH);
 
-        gameFrame.setSize(2000, 1100);
+        gameFrame.setSize(1900, 1000);
         gameFrame.setVisible(true);
     }
 

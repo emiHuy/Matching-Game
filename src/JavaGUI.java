@@ -26,7 +26,7 @@ public class JavaGUI extends JFrame implements ActionListener{
         displayStart = new JFrame();
         displayStart.add(mainPanel);
         displayStart.setTitle("Card Matching Game");
-        displayStart.setSize(2000, 1100);
+        displayStart.setSize(1900, 1000);
         displayStart.setVisible(true);
         displayStart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
