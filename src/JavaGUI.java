@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,6 +17,8 @@ public class JavaGUI extends JFrame implements ActionListener{
     private JButton backButtonAbout;
     private JPanel scoresList;
     private JButton backButtonScores;
+    private JLabel scoreDisplay;
+    private JTextPane aboutText;
     private JFrame displayStart;
 
     public JavaGUI() {
@@ -44,6 +47,10 @@ public class JavaGUI extends JFrame implements ActionListener{
         quitButton.addActionListener(this);
         backButtonAbout.addActionListener(this);
         backButtonScores.addActionListener(this);
+
+        scoreDisplay.setText("Score: " + 0);
+        aboutText.setText("Welcome to the Card Matching Game created by Emily and Keenan.\n\nThis matching game serves to test your memory, so good luck and have fun!");
+        aboutText.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
     }
 
     @Override

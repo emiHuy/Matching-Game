@@ -67,7 +67,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         scoreDisplay.setFont(new Font("Arial", Font.PLAIN, 26));
         buttonPanel.add(scoreDisplay, BorderLayout.WEST);
 
-        buttonPanel.setBorder(new EmptyBorder(0,30,30,30));
+        buttonPanel.setBorder(new EmptyBorder(30,30,30,30));
         gameFrame.setSize(2000, 1000);
         gameFrame.setVisible(true);
     }
