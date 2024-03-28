@@ -1,5 +1,3 @@
-import com.sun.scenario.effect.LinearConvolveCoreEffect;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -57,21 +55,20 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         }
         borderPanel.add(gamePanel, BorderLayout.CENTER);
 
-        JPanel buttonPanel = new JPanel(new BorderLayout());
-
-        JLabel scoreDisplay = new JLabel("Score: " + 0);
-        scoreDisplay.setFont(new Font("Arial", Font.PLAIN, 26));
-        buttonPanel.add(scoreDisplay, BorderLayout.WEST);
-
         // add back button
+        JPanel buttonPanel = new JPanel(new BorderLayout());
         backButton = new JButton("Back");
         backButton.addActionListener(this);
         backButton.setFont(new Font("Arial", Font.PLAIN, 26));
         buttonPanel.add(backButton, BorderLayout.EAST);
         borderPanel.add(buttonPanel,BorderLayout.SOUTH);
 
+        JLabel scoreDisplay = new JLabel("Score: " + 0);
+        scoreDisplay.setFont(new Font("Arial", Font.PLAIN, 26));
+        buttonPanel.add(scoreDisplay, BorderLayout.WEST);
+
         buttonPanel.setBorder(new EmptyBorder(0,30,30,30));
-        gameFrame.setSize(1900, 1000);
+        gameFrame.setSize(2000, 1000);
         gameFrame.setVisible(true);
     }
 
