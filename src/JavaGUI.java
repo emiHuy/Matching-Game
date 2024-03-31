@@ -1,6 +1,9 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+
 
 public class JavaGUI extends JFrame implements ActionListener{
     private JPanel mainPanel;
@@ -16,6 +19,10 @@ public class JavaGUI extends JFrame implements ActionListener{
     private JButton backButtonAbout;
     private JPanel scoresList;
     private JButton backButtonScores;
+    private JLabel scoreDisplay;
+    private JTextPane aboutText;
+    private JLabel gameCharRight;
+    private JLabel gameCharLeft;
     private JFrame displayStart;
 
     public JavaGUI() {
@@ -44,6 +51,15 @@ public class JavaGUI extends JFrame implements ActionListener{
         quitButton.addActionListener(this);
         backButtonAbout.addActionListener(this);
         backButtonScores.addActionListener(this);
+
+        scoreDisplay.setText("Score: " + 0);
+        aboutText.setText("Welcome to the Card Matching Game created by Emily and Keenan in 2024.\n\n" +
+                "With our Card Matching Game, we bring you endless fun to help you unwind after a long day.\n\n"+
+                "Play our game to test your cognitive abilities and enhance your memory.\n\n" +
+                "It's time to start matching! Good luck and have fun!");
+        aboutText.setBorder(BorderFactory.createLineBorder(Color.WHITE, 4));
+        gameCharRight.setIcon(new ImageIcon("game Character.png"));
+        gameCharLeft.setIcon(new ImageIcon("game Character.png"));
     }
 
     @Override
