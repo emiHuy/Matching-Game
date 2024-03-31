@@ -2,120 +2,37 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="JavaGUI">
   <grid id="27dc6" binding="mainPanel" layout-manager="CardLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="659" height="517"/>
+      <xy x="20" y="20" width="500" height="523"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="6788e" binding="startScreen" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="12a4c" binding="startScreen" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <card name="Card1"/>
         </constraints>
         <properties>
           <background color="-13945525"/>
+          <foreground color="-394241"/>
         </properties>
-        <border type="none" title=""/>
+        <border type="none"/>
         <children>
-          <component id="d20cc" class="javax.swing.JButton" binding="aboutButton" default-binding="true">
-            <constraints>
-              <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <minimum-size width="100" height="80"/>
-                <maximum-size width="800" height="120"/>
-              </grid>
-            </constraints>
-            <properties>
-              <background color="-8355178"/>
-              <font size="26"/>
-              <foreground color="-14737373"/>
-              <text value="About"/>
-            </properties>
-          </component>
-          <component id="90a7" class="javax.swing.JButton" binding="instructionsButton" default-binding="true">
-            <constraints>
-              <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <minimum-size width="100" height="80"/>
-                <maximum-size width="800" height="120"/>
-              </grid>
-            </constraints>
-            <properties>
-              <background color="-8355178"/>
-              <enabled value="true"/>
-              <font size="26"/>
-              <foreground color="-14737373"/>
-              <text value="Instructions"/>
-            </properties>
-          </component>
-          <component id="8687f" class="javax.swing.JButton" binding="scoresButton" default-binding="true">
-            <constraints>
-              <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <minimum-size width="100" height="80"/>
-                <maximum-size width="800" height="120"/>
-              </grid>
-            </constraints>
-            <properties>
-              <background color="-8355178"/>
-              <font size="26"/>
-              <foreground color="-14737373"/>
-              <text value="Scores"/>
-            </properties>
-          </component>
-          <component id="66327" class="javax.swing.JButton" binding="quitButton" default-binding="true">
-            <constraints>
-              <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <minimum-size width="100" height="80"/>
-                <maximum-size width="800" height="120"/>
-              </grid>
-            </constraints>
-            <properties>
-              <background color="-8355178"/>
-              <font size="26"/>
-              <foreground color="-14737373"/>
-              <text value="Quit"/>
-            </properties>
-          </component>
-          <component id="4b339" class="javax.swing.JLabel" binding="highscoreDisplay">
-            <constraints>
-              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="221" height="28"/>
-              </grid>
-            </constraints>
-            <properties>
-              <background color="-1838081"/>
-              <font size="24"/>
-              <foreground color="-459777"/>
-              <text value="Score:"/>
-            </properties>
-          </component>
-          <component id="9ba88" class="javax.swing.JLabel" binding="highScoreValue">
-            <constraints>
-              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-1839105"/>
-              <font size="24"/>
-              <foreground color="-394241"/>
-              <text value="0"/>
-            </properties>
-          </component>
-          <component id="44750" class="javax.swing.JLabel" binding="gameTitle">
+          <component id="57c8b" class="javax.swing.JLabel">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <background color="-1838849"/>
-              <enabled value="true"/>
-              <font name="Footlight MT Light" size="48"/>
+              <font size="48"/>
               <foreground color="-394241"/>
-              <horizontalAlignment value="0"/>
               <text value="Card Matching Game"/>
             </properties>
           </component>
-          <component id="52e43" class="javax.swing.JButton" binding="playButton" default-binding="true">
+          <component id="88b2f" class="javax.swing.JButton" binding="playButton" default-binding="true">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <minimum-size width="100" height="80"/>
-                <maximum-size width="800" height="120"/>
+                <minimum-size width="100" height="60"/>
+                <maximum-size width="800" height="80"/>
               </grid>
             </constraints>
             <properties>
@@ -125,9 +42,86 @@
               <text value="Play"/>
             </properties>
           </component>
+          <component id="eaaaa" class="javax.swing.JButton" binding="aboutButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="100" height="60"/>
+                <maximum-size width="800" height="80"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-8355178"/>
+              <font size="26"/>
+              <foreground color="-14737373"/>
+              <hideActionText value="false"/>
+              <text value="About"/>
+            </properties>
+          </component>
+          <component id="be9a8" class="javax.swing.JButton" binding="instructionsButton" default-binding="true">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="100" height="60"/>
+                <maximum-size width="800" height="80"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-8355178"/>
+              <font size="26"/>
+              <foreground color="-14737373"/>
+              <text value="Instructions"/>
+            </properties>
+          </component>
+          <component id="c02a9" class="javax.swing.JButton" binding="scoresButton" default-binding="true">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="100" height="60"/>
+                <maximum-size width="800" height="80"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-8355178"/>
+              <font size="26"/>
+              <foreground color="-14737373"/>
+              <text value="Scores"/>
+            </properties>
+          </component>
+          <component id="fe3c0" class="javax.swing.JButton" binding="quitButton" default-binding="true">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="100" height="60"/>
+                <maximum-size width="800" height="80"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-8355178"/>
+              <font size="26"/>
+              <foreground color="-14737373"/>
+              <text value="Quit"/>
+            </properties>
+          </component>
+          <component id="d3b3b" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="24"/>
+              <foreground color="-394241"/>
+              <text value="Score"/>
+            </properties>
+          </component>
+          <component id="3633f" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="24"/>
+              <foreground color="-394241"/>
+              <text value="0"/>
+            </properties>
+          </component>
         </children>
       </grid>
-      <grid id="be81d" binding="aboutScreen" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="1a734" binding="aboutScreen" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <card name="Card2"/>
@@ -137,38 +131,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="b896d" class="javax.swing.JTextPane" binding="HEYYTextPane" default-binding="true">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="50"/>
-              </grid>
-            </constraints>
-            <properties>
-              <editable value="false"/>
-              <font size="20"/>
-              <text value="HEYY."/>
-            </properties>
-          </component>
-          <component id="9ed8b" class="javax.swing.JButton" binding="backButtonAbout">
-            <constraints>
-              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font size="26"/>
-              <text value="Back"/>
-            </properties>
-          </component>
-          <hspacer id="5f08d">
-            <constraints>
-              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </hspacer>
-          <hspacer id="80358">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </hspacer>
-          <component id="e4d13" class="javax.swing.JLabel">
+          <component id="d70df" class="javax.swing.JLabel">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -178,19 +141,50 @@
               <text value="About"/>
             </properties>
           </component>
-          <vspacer id="7de23">
+          <component id="a67c3" class="javax.swing.JTextPane" default-binding="true">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+              <font size="20"/>
+              <text value="HEYY"/>
+            </properties>
+          </component>
+          <component id="cadba" class="javax.swing.JButton" binding="backButtonAbout">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="26"/>
+              <text value="Back"/>
+            </properties>
+          </component>
+          <hspacer id="cd563">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="63ddb">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <vspacer id="e7f8b">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
-          <vspacer id="ad5e2">
+          <vspacer id="977b3">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
         </children>
       </grid>
-      <grid id="e19" binding="scoresList" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="55a6c" binding="scoresList" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <card name="Card3"/>
@@ -200,26 +194,21 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="4d9c5" class="javax.swing.JLabel" binding="scoresHead">
+          <component id="c1ccd" class="javax.swing.JLabel">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font size="48"/>
-              <foreground color="-394241"/>
+              <font size="26"/>
               <text value="All Scores and Attempts"/>
             </properties>
           </component>
-          <vspacer id="6406f">
+          <component id="3cfa0" class="javax.swing.JButton" binding="backButtonScores">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </vspacer>
-          <component id="35e1d" class="javax.swing.JButton" binding="backButtonScores">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font size="26"/>
               <text value="Back"/>
             </properties>
           </component>
