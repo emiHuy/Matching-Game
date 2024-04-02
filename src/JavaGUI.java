@@ -22,7 +22,6 @@ public class JavaGUI extends JFrame implements ActionListener{
     private JLabel scoreDisplay;
     private JTextPane aboutText;
     private JLabel gameCharRight;
-    private JLabel gameCharLeft;
     private JFrame displayStart;
 
     public JavaGUI() {
@@ -59,7 +58,6 @@ public class JavaGUI extends JFrame implements ActionListener{
                 "It's time to start matching! Good luck and have fun!");
         aboutText.setBorder(BorderFactory.createLineBorder(Color.WHITE, 4));
         gameCharRight.setIcon(new ImageIcon("game Character.png"));
-        gameCharLeft.setIcon(new ImageIcon("game Character.png"));
     }
 
     @Override
