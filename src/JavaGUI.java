@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-
+import javax.swing.border.EmptyBorder;
 
 public class JavaGUI extends JFrame implements ActionListener{
     private JPanel mainPanel;
@@ -22,7 +22,6 @@ public class JavaGUI extends JFrame implements ActionListener{
     private JLabel scoreDisplay;
     private JTextPane aboutText;
     private JLabel gameCharRight;
-    private JLabel gameCharLeft;
     private JFrame displayStart;
 
     public JavaGUI() {
@@ -31,16 +30,19 @@ public class JavaGUI extends JFrame implements ActionListener{
 
     private void addComponents(){
         displayStart = new JFrame();
-        displayStart.add(mainPanel);
-        displayStart.setTitle("Card Matching Game");
         displayStart.setSize(1900, 1000);
+        displayStart.add(mainPanel);
+        mainPanel.setVisible(true);
+        displayStart.setTitle("Card Matching Game");
         displayStart.setVisible(true);
+        displayStart.setLocationRelativeTo(null);
         displayStart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        displayStart.add(aboutScreen);
+        mainPanel.add(startScreen);
+        startScreen.setVisible(true);
+        mainPanel.add(aboutScreen);
         aboutScreen.setVisible(false);
-
-        displayStart.add(scoresList);
+        mainPanel.add(scoresList);
         scoresList.setVisible(false);
 
         playButton.addActionListener(this);
@@ -59,7 +61,7 @@ public class JavaGUI extends JFrame implements ActionListener{
                 "It's time to start matching! Good luck and have fun!");
         aboutText.setBorder(BorderFactory.createLineBorder(Color.WHITE, 4));
         gameCharRight.setIcon(new ImageIcon("game Character.png"));
-        gameCharLeft.setIcon(new ImageIcon("game Character.png"));
+        displayStart.setContentPane(mainPanel);
     }
 
     @Override
@@ -69,18 +71,18 @@ public class JavaGUI extends JFrame implements ActionListener{
             displayStart.dispose();
         }
         else if(e.getSource() == aboutButton) {
-            mainPanel.setVisible(false);
+            startScreen.setVisible(false);
             aboutScreen.setVisible(true);
         }
         else if(e.getSource() == instructionsButton) {
             JFrame instructions = new instructionsPage();
         }
         else if(e.getSource() == scoresButton) {
-            mainPanel.setVisible(false);
+            startScreen.setVisible(false);
             scoresList.setVisible(true);
         }
         else if(e.getSource() == backButtonAbout || e.getSource() == backButtonScores) {
-            mainPanel.setVisible(true);
+            startScreen.setVisible(true);
             aboutScreen.setVisible(false);
             scoresList.setVisible(false);
         }
