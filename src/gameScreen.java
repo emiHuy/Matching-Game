@@ -37,8 +37,11 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
 
     private void gameSetup(){
         gameFrame = new JFrame();
+        gameFrame.setSize(1900, 1000);
+        gameFrame.setVisible(true);
         gameFrame.setTitle("Card Matching Game");
         gameFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        gameFrame.setLocationRelativeTo(null);
 
         JPanel borderPanel = new JPanel(new BorderLayout());
         gameFrame.add(borderPanel);
@@ -66,10 +69,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         JLabel scoreDisplay = new JLabel("Score: " + 0);
         scoreDisplay.setFont(new Font("Arial", Font.PLAIN, 26));
         buttonPanel.add(scoreDisplay, BorderLayout.WEST);
-
         buttonPanel.setBorder(new EmptyBorder(30,30,30,30));
-        gameFrame.setSize(1900, 1000);
-        gameFrame.setVisible(true);
     }
 
     private void menuSetup(JFrame frame) {
@@ -77,6 +77,8 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         JMenuBar menuBar = new JMenuBar();
         openInstructions = new JMenuItem("Instructions");
         openInstructions.addActionListener(this);
+        instructionMenu.setFont(new Font("Arial", Font.PLAIN, 25));
+        openInstructions.setFont(new Font("Arial", Font.PLAIN, 20));
         instructionMenu.add(openInstructions);
         menuBar.add(instructionMenu);
         frame.setJMenuBar(menuBar);
@@ -86,7 +88,9 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == backButton) {
             // ask for user confirmation
-            int confirmBack = JOptionPane.showConfirmDialog(null, "Are you sure you want to go back? Game will not save.", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 20));
+            UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 18));
+            int confirmBack = JOptionPane.showConfirmDialog(null, "Are you sure you want to go back? Game will not save.", "Confirm Back", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (confirmBack == JOptionPane.YES_OPTION){
                 // go back to starting menu
                 gameFrame.dispose();

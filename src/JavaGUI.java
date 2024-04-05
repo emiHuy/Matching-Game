@@ -89,7 +89,9 @@ public class JavaGUI extends JFrame implements ActionListener{
         // if quit button is clicked
         else {
             // ask user for confirmation to quit
-            int quitResponse = JOptionPane.showConfirmDialog(instructionsButton,"Are you sure you want to quit?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 20));
+            UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 18));
+            int quitResponse = JOptionPane.showConfirmDialog(instructionsButton, "Are you sure you want to quit?", "Confirm Quit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(quitResponse == JOptionPane.YES_OPTION) {
                 // exit program if user confirms
                 displayStart.dispose();
