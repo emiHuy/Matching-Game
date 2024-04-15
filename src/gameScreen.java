@@ -10,18 +10,18 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     private JFrame gameFrame;
     private JMenuItem openInstructions;
     private JPanel gamePanel;
-    private JLabel grid1;
-    private JLabel grid2;
-    private JLabel grid3;
-    private JLabel grid4;
-    private JLabel grid5;
-    private JLabel grid6;
-    private JLabel grid7;
-    private JLabel grid8;
-    private JLabel grid9;
-    private JLabel grid10;
-    private JLabel grid11;
-    private JLabel grid12;
+    private JButton grid1;
+    private JButton grid2;
+    private JButton grid3;
+    private JButton grid4;
+    private JButton grid5;
+    private JButton grid6;
+    private JButton grid7;
+    private JButton grid8;
+    private JButton grid9;
+    private JButton grid10;
+    private JButton grid11;
+    private JButton grid12;
     private final ImageIcon cardBack = new ImageIcon("cardback.png");
     private final ImageIcon circleCard = new ImageIcon("circle card.png");
     private final ImageIcon clubCard = new ImageIcon("club card.png");
@@ -29,7 +29,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     private final ImageIcon spadeCard = new ImageIcon("spade card.png");
     private final ImageIcon squareCard = new ImageIcon("square card.png");
     private final ImageIcon starCard = new ImageIcon("star card.png");
-    private final JLabel[] grids = {grid1, grid2, grid3, grid4, grid5, grid6, grid7, grid8, grid9, grid10, grid11, grid12};
+    private final JButton [] grids = {grid1, grid2, grid3, grid4, grid5, grid6, grid7, grid8, grid9, grid10, grid11, grid12};
 
     public gameScreen(){
         gameSetup();
@@ -53,7 +53,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
 
         // display cards
         for(int i = 0; i<grids.length; i++){
-            grids[i] = new JLabel(cardBack);
+            grids[i] = new JButton(cardBack);
             gamePanel.add(grids[i]);
         }
         borderPanel.add(gamePanel, BorderLayout.CENTER);
