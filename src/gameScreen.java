@@ -33,6 +33,16 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     private final ImageIcon starCard = new ImageIcon("star card.png");
     private final ArrayList<JButton> cards = new ArrayList<>();
     private final ArrayList<ImageIcon> cardIcons = new ArrayList<>();
+    private JButton openedBttn1 = null;
+    private ImageIcon openedIcon1 = null;
+    private JButton openedBttn2 = null;
+    private ImageIcon openedIcon2 = null;
+    private String matchMsg;
+    private boolean match;
+    private int matchResult;
+    private int matchedPairs = 0;
+    private final int totalPairs = 6;
+
     public gameScreen(){
         gameSetup();
     }
@@ -108,9 +118,9 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == backButton) {
             // ask for user confirmation
-            UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 20));
+            UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 20));
             UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 18));
-            int confirmBack = JOptionPane.showConfirmDialog(null, "Are you sure you want to go back? Game will not save.", "Confirm Back", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int confirmBack = JOptionPane.showConfirmDialog(null, "Are you sure you want to go back? Game will NOT save.", "Confirm Back", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (confirmBack == JOptionPane.YES_OPTION){
                 // go back to starting menu
                 gameFrame.dispose();
@@ -120,12 +130,58 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         else if(e.getSource() == openInstructions) {
             new instructionsPage();
         }
-        // if JButton card is clicked, reveal matching its corresponding icon
         else {
             JButton clickedButton = (JButton) e.getSource();
             int index = cards.indexOf(clickedButton);
             ImageIcon icon = cardIcons.get(index);
-            clickedButton.setIcon(icon);
+
+            // flips over first card when first card is clicked
+            if(openedBttn1 == null){
+                openedBttn1 = clickedButton;
+                openedIcon1 = icon;
+                clickedButton.setIcon(icon);
+                matchResult = 1;
+            }
+            // flips over second card when second card is clicked
+            else if(openedBttn2 == null && clickedButton != openedBttn1){
+                openedBttn2 = clickedButton;
+                openedIcon2 = icon;
+                clickedButton.setIcon(icon);
+
+                if(openedIcon1.equals(openedIcon2)){
+                    match = true;
+                    matchMsg = "It's a MATCH!";
+                }
+                else{
+                    match = false;
+                    matchMsg = "Unlucky... try again.";
+                }
+                while(matchResult != 0) {
+                    Object[] options = {"Continue"};
+                    UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 20));
+                    UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 18));
+                    matchResult = JOptionPane.showOptionDialog(null, matchMsg, "Is it a match?", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+                    if (matchResult == 0 && match) {
+                        openedBttn1.setVisible(false);
+                        openedBttn2.setVisible(false);
+                        openedBttn1 = null;
+                        openedIcon1 = null;
+                        openedBttn2 = null;
+                        openedIcon2 = null;
+                        matchedPairs++;
+                        if(matchedPairs == totalPairs){
+                            JOptionPane.showMessageDialog(null, "You did it!");
+                        }
+                    } else if (matchResult == 0 && !match) {
+                        openedBttn1.setIcon(cardBack);
+                        openedBttn2.setIcon(cardBack);
+                        openedBttn1 = null;
+                        openedIcon1 = null;
+                        openedBttn2 = null;
+                        openedIcon2 = null;
+                    }
+                }
+            }
         }
     }
 }
