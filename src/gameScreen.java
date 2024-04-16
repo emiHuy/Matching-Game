@@ -42,6 +42,9 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     private int matchResult;
     private int matchedPairs = 0;
     private final int totalPairs = 6;
+    public int trackScore = 0;
+    private JLabel scoreDisplay;
+    private String player;
 
     public gameScreen(){
         gameSetup();
@@ -96,7 +99,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         buttonPanel.add(backButton, BorderLayout.EAST);
         borderPanel.add(buttonPanel,BorderLayout.SOUTH);
 
-        JLabel scoreDisplay = new JLabel("Score: " + 0);
+        scoreDisplay = new JLabel("Score: " + 0);
         scoreDisplay.setFont(new Font("Arial", Font.PLAIN, 26));
         buttonPanel.add(scoreDisplay, BorderLayout.WEST);
         buttonPanel.setBorder(new EmptyBorder(30,30,30,30));
@@ -168,9 +171,11 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
                         openedIcon1 = null;
                         openedBttn2 = null;
                         openedIcon2 = null;
+                        trackScore += 100;
                         matchedPairs++;
                         if(matchedPairs == totalPairs){
-                            JOptionPane.showMessageDialog(null, "You did it!");
+                            scoreDisplay.setText("Score: " + trackScore);
+                            player = JOptionPane.showInputDialog(null, "Enter player name:", "Enter Name", JOptionPane.QUESTION_MESSAGE);
                         }
                     } else if (matchResult == 0 && !match) {
                         openedBttn1.setIcon(cardBack);
@@ -179,7 +184,9 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
                         openedIcon1 = null;
                         openedBttn2 = null;
                         openedIcon2 = null;
+                        trackScore -= 10;
                     }
+                    scoreDisplay.setText("Score: " + trackScore);
                 }
             }
         }
