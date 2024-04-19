@@ -69,15 +69,11 @@ public class JavaGUI extends JFrame implements ActionListener{
         gameCharRight.setIcon(new ImageIcon("game Character.png"));
     }
 
-    public void openScores(){
-        //initialize();
+    public void openScores(String newPlayer, int newScore){
+        initialize();
         startScreen.setVisible(false);
         scoresList.setVisible(true);
-        /*
-        playerList = Arrays.copyOf(playerList, (playerList.length+1));
-        playerList[-1] = newPlayer;
-        System.out.println(newPlayer);
-        */
+        System.out.println(newPlayer + newScore);
     }
 
     public void initializeGUI(){

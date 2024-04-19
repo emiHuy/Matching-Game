@@ -224,7 +224,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
             player = JOptionPane.showInputDialog(null, "Player Name: ", "End", JOptionPane.PLAIN_MESSAGE);
         }while(player == null || player.isEmpty());
         System.out.print(player);
-        new JavaGUI().openScores();
+        Main.openInstanceScores(player, trackScore);
         gameFrame.dispose();
     }
 }

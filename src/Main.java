@@ -9,10 +9,7 @@ public class Main {
     public static void openInstanceDisplay(){
         display.initializeGUI();
     }
-    /*
     public static void openInstanceScores(String player, int score){
         display.openScores(player, score);
     }
-
-     */
 }
