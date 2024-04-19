@@ -144,8 +144,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
 
     private void cardClicked(JButton clickedButton){
         int index = cards.indexOf(clickedButton);
-        //ImageIcon icon = cardIcons.get(index);
-        ImageIcon icon = cardBack;
+        ImageIcon icon = cardIcons.get(index);
 
         // flips over first card when first card is clicked
         if(openedCard1 == null){

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
 
@@ -21,8 +22,8 @@ public class JavaGUI extends JFrame implements ActionListener{
     private JLabel scoreDisplay;
     private JLabel gameCharRight;
     private JTextPane aboutText;
-    private String[] playerList;
-    private int[] playerScoreList;
+    private ArrayList<String> playerList = new ArrayList<>();
+    private ArrayList<Integer> playerScoreList = new ArrayList<>();
 
     public JavaGUI() {
         initialize();
@@ -73,7 +74,8 @@ public class JavaGUI extends JFrame implements ActionListener{
         initialize();
         startScreen.setVisible(false);
         scoresList.setVisible(true);
-        System.out.println(newPlayer + newScore);
+        playerList.add(newPlayer);
+        playerScoreList.add(newScore);
     }
 
     public void initializeGUI(){
