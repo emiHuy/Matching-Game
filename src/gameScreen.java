@@ -7,7 +7,7 @@ import javax.swing.border.EmptyBorder;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class gameScreen extends javax.swing.JFrame implements ActionListener{
+public class gameScreen extends JFrame implements ActionListener{
     private JButton backButton;
     private JFrame gameFrame;
     private JMenuItem openInstructions;
@@ -30,6 +30,8 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     private final int totalPairs = 6;
     public int trackScore = 0;
     private JLabel scoreDisplay;
+    private JPanel collectionPanel;
+    private JTextField nameBox;
 
     public gameScreen(){
         initialize();
@@ -141,8 +143,8 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
 
     private void cardClicked(JButton clickedButton){
         int index = cards.indexOf(clickedButton);
-        ImageIcon icon = cardIcons.get(index);
-
+        //ImageIcon icon = cardIcons.get(index);
+        ImageIcon icon = cardBack;
         // flips over first card when first card is clicked
         if(openedBttn1 == null){
             openedBttn1 = clickedButton;
@@ -165,17 +167,18 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         }
     }
 
-    private void continueGame(boolean match, String matchMsg){
+    private void continueGame(boolean isMatch, String matchMsg){
+        Object[] options = {"Continue"};
+        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 24));
+        UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 22));
+
         while(matchResult != 0) {
             // display match result message
-            Object[] options = {"Continue"};
-            UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 24));
-            UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 22));
             matchResult = JOptionPane.showOptionDialog(null, matchMsg, "Is it a match?",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
 
             // when user confirms to continue game, and cards are a match,
-            if (matchResult == 0 && match) {
+            if (matchResult == 0 && isMatch) {
                 // remove card icons from screen and add to score
                 openedBttn1.setVisible(false);
                 openedBttn2.setVisible(false);
@@ -188,13 +191,11 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
 
                 // when all card pairs are matched, display final score and ask for player name
                 if(matchedPairs == totalPairs){
-                    scoreDisplay.setText("Score: " + trackScore);
-                    String player = JOptionPane.showInputDialog(null, "Enter player name:",
-                            "Enter Name", JOptionPane.QUESTION_MESSAGE);
+                    collectUserInfo();
                 }
             }
             // when user confirms to continue game, and cards are a match,
-            else if (matchResult == 0 && !match) {
+            else if (matchResult == 0 && !isMatch) {
                 // flip over cards to reveal back side
                 openedBttn1.setIcon(cardBack);
                 openedBttn2.setIcon(cardBack);
@@ -207,5 +208,46 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
             // Updates Score
             scoreDisplay.setText("Score: " + trackScore);
         }
+    }
+
+    private void collectUserInfo(){
+        String player;
+        Object[] options = {"Confirm"};
+        int choice = 1;
+
+        setCollectionComponents();
+
+        // display dialog to user for data collection
+        do {
+            UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 22));
+            choice = JOptionPane.showOptionDialog(null, collectionPanel, "End",
+                    JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+            // get player name
+            player = nameBox.getText();
+        } while(choice != 0 || player.equals(""));
+
+        // go back to start screen
+        new JavaGUI();
+        gameFrame.dispose();
+    }
+    private void setCollectionComponents(){
+        // set up dialog panel for collecting data
+        collectionPanel = new JPanel(new BorderLayout());
+
+        // set panel components
+        JLabel nameText = new JLabel("Enter player name: ");
+        nameBox = new JTextField(15);;
+        JLabel scoreText = new JLabel("Score: " + trackScore);
+        scoreText.setBorder(new EmptyBorder(0,0,15,0));
+
+        // set fonts
+        nameText.setFont(new Font("Arial", Font.PLAIN, 24));
+        nameBox.setFont(new Font("Arial", Font.PLAIN, 24));
+        scoreText.setFont(new Font("Arial", Font.PLAIN, 24));
+
+        // add components to panel for display
+        collectionPanel.add(nameText, BorderLayout.CENTER);
+        collectionPanel.add(nameBox, BorderLayout.SOUTH);
+        collectionPanel.add(scoreText, BorderLayout.NORTH);
     }
 }
