@@ -2,24 +2,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import javax.swing.ImageIcon;
 
 public class JavaGUI extends JFrame implements ActionListener{
+    private JFrame displayStart;
     private JPanel mainPanel;
     private JPanel startScreen;
+    private JPanel aboutScreen;
+    private JPanel scoresList;
     private JButton playButton;
     private JButton aboutButton;
     private JButton instructionsButton;
     private JButton quitButton;
     private JButton scoresButton;
-    private JPanel aboutScreen;
     private JButton backButtonAbout;
-    private JPanel scoresList;
     private JButton backButtonScores;
     private JLabel scoreDisplay;
-    private JTextPane aboutText;
     private JLabel gameCharRight;
-    private JFrame displayStart;
+    private JTextPane aboutText;
+    private String[] playerList;
+    private int[] playerScoreList;
 
     public JavaGUI() {
         initialize();
@@ -66,9 +69,19 @@ public class JavaGUI extends JFrame implements ActionListener{
         gameCharRight.setIcon(new ImageIcon("game Character.png"));
     }
 
-    public void setScoresVisible(){
+    public void openScores(){
+        //initialize();
         startScreen.setVisible(false);
         scoresList.setVisible(true);
+        /*
+        playerList = Arrays.copyOf(playerList, (playerList.length+1));
+        playerList[-1] = newPlayer;
+        System.out.println(newPlayer);
+        */
+    }
+
+    public void initializeGUI(){
+        initialize();
     }
 
     @Override
@@ -85,7 +98,8 @@ public class JavaGUI extends JFrame implements ActionListener{
             new instructionsPage();
         }
         else if(e.getSource() == scoresButton) {
-            setScoresVisible();
+            startScreen.setVisible(false);
+            scoresList.setVisible(true);
         }
         else if(e.getSource() == backButtonAbout || e.getSource() == backButtonScores) {
             startScreen.setVisible(true);

@@ -7,11 +7,25 @@ import javax.swing.border.EmptyBorder;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class gameScreen extends JFrame implements ActionListener{
-    private JButton backButton;
+public class gameScreen extends javax.swing.JFrame implements ActionListener{
     private JFrame gameFrame;
-    private JMenuItem openInstructions;
     private JPanel gamePanel;
+    private JPanel collectionPanel;
+    private JLabel scoreDisplay;
+    private JMenuItem openInstructions;
+    private JButton backButton;
+    private JButton openedCard1;
+    private JButton openedCard2;
+    private ImageIcon openedIcon1;
+    private ImageIcon openedIcon2;
+    private JTextField nameBox;
+    private String player;
+    private int matchResult;
+    private int matchedPairs = 0;
+    public int trackScore = 0;
+    private final int totalPairs = 6;
+    private final ArrayList<JButton> cards = new ArrayList<>();
+    private final ArrayList<ImageIcon> cardIcons = new ArrayList<>();
     private final ImageIcon cardBack = new ImageIcon("cardback.png");
     private final ImageIcon circleCard = new ImageIcon("circle card.png");
     private final ImageIcon clubCard = new ImageIcon("club card.png");
@@ -19,19 +33,6 @@ public class gameScreen extends JFrame implements ActionListener{
     private final ImageIcon spadeCard = new ImageIcon("spade card.png");
     private final ImageIcon squareCard = new ImageIcon("square card.png");
     private final ImageIcon starCard = new ImageIcon("star card.png");
-    private final ArrayList<JButton> cards = new ArrayList<>();
-    private final ArrayList<ImageIcon> cardIcons = new ArrayList<>();
-    private JButton openedBttn1;
-    private ImageIcon openedIcon1;
-    private JButton openedBttn2;
-    private ImageIcon openedIcon2;
-    private int matchResult;
-    private int matchedPairs = 0;
-    private final int totalPairs = 6;
-    public int trackScore = 0;
-    private JLabel scoreDisplay;
-    private JPanel collectionPanel;
-    private JTextField nameBox;
 
     public gameScreen(){
         initialize();
@@ -52,6 +53,7 @@ public class gameScreen extends JFrame implements ActionListener{
         JPanel borderPanel = new JPanel(new BorderLayout());
         gameFrame.add(borderPanel);
 
+        // set up panel
         gamePanel = new JPanel();
         gamePanel.setBackground(new Color(43, 53, 75));
         gamePanel.setLayout(new GridLayout(3,4,10,10));
@@ -88,6 +90,7 @@ public class gameScreen extends JFrame implements ActionListener{
     }
 
     private void setupCards(){
+        // add card image icons to array
         cardIcons.add(circleCard);
         cardIcons.add(circleCard);
         cardIcons.add(clubCard);
@@ -137,24 +140,24 @@ public class gameScreen extends JFrame implements ActionListener{
         if (confirmBack == JOptionPane.YES_OPTION){
             // go back to starting menu
             gameFrame.dispose();
-            new JavaGUI();
+            Main.openInstanceDisplay();
         }
     }
 
     private void cardClicked(JButton clickedButton){
         int index = cards.indexOf(clickedButton);
-        //ImageIcon icon = cardIcons.get(index);
-        ImageIcon icon = cardBack;
+        ImageIcon icon = cardIcons.get(index);
+
         // flips over first card when first card is clicked
-        if(openedBttn1 == null){
-            openedBttn1 = clickedButton;
+        if(openedCard1 == null){
+            openedCard1 = clickedButton;
             openedIcon1 = icon;
             clickedButton.setIcon(icon);
             matchResult = 1;
         }
         // flips over second card when second card is clicked
-        else if(openedBttn2 == null && clickedButton != openedBttn1){
-            openedBttn2 = clickedButton;
+        else if(openedCard2 == null && clickedButton != openedCard1){
+            openedCard2 = clickedButton;
             openedIcon2 = icon;
             clickedButton.setIcon(icon);
 
@@ -180,11 +183,11 @@ public class gameScreen extends JFrame implements ActionListener{
             // when user confirms to continue game, and cards are a match,
             if (matchResult == 0 && isMatch) {
                 // remove card icons from screen and add to score
-                openedBttn1.setVisible(false);
-                openedBttn2.setVisible(false);
-                openedBttn1 = null;
+                openedCard1.setVisible(false);
+                openedCard2.setVisible(false);
+                openedCard1 = null;
                 openedIcon1 = null;
-                openedBttn2 = null;
+                openedCard2 = null;
                 openedIcon2 = null;
                 trackScore += 100;
                 matchedPairs++;
@@ -196,14 +199,16 @@ public class gameScreen extends JFrame implements ActionListener{
             }
             // when user confirms to continue game, and cards are a match,
             else if (matchResult == 0 && !isMatch) {
-                // flip over cards to reveal back side
-                openedBttn1.setIcon(cardBack);
-                openedBttn2.setIcon(cardBack);
-                openedBttn1 = null;
+                // flip over cards to reveal back side (reset cards) and subtract from score
+                openedCard1.setIcon(cardBack);
+                openedCard2.setIcon(cardBack);
+                openedCard1 = null;
                 openedIcon1 = null;
-                openedBttn2 = null;
+                openedCard2 = null;
                 openedIcon2 = null;
-                trackScore -= 10;
+                if(trackScore > 0) {
+                    trackScore -= 10;
+                }
             }
             // Updates Score
             scoreDisplay.setText("Score: " + trackScore);
@@ -211,8 +216,6 @@ public class gameScreen extends JFrame implements ActionListener{
     }
 
     private void collectUserInfo(){
-        String player;
-        Object[] options = {"Confirm"};
         int choice = 1;
 
         setCollectionComponents();
@@ -221,16 +224,14 @@ public class gameScreen extends JFrame implements ActionListener{
         do {
             UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 22));
             choice = JOptionPane.showOptionDialog(null, collectionPanel, "End",
-                    JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+                    JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[] {"Confirm"}, null);
             // get player name
             player = nameBox.getText();
         } while(choice != 0 || player.isEmpty());
-
-        // go back to score screen
-        JavaGUI display = new JavaGUI();
-        display.setScoresVisible();
+        new JavaGUI().openScores();
         gameFrame.dispose();
     }
+
     private void setCollectionComponents(){
         // set up dialog panel for collecting data
         collectionPanel = new JPanel(new BorderLayout());
@@ -239,7 +240,8 @@ public class gameScreen extends JFrame implements ActionListener{
         JLabel nameText = new JLabel("Enter player name: ");
         nameBox = new JTextField(15);;
         JLabel scoreText = new JLabel("Score: " + trackScore);
-        scoreText.setBorder(new EmptyBorder(0,0,15,0));
+
+        scoreText.setBorder(new EmptyBorder(0,0,12,0));
 
         // set fonts
         nameText.setFont(new Font("Arial", Font.PLAIN, 24));

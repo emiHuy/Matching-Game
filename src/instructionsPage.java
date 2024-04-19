@@ -4,8 +4,8 @@ import java.awt.event.ActionListener;
 
 public class instructionsPage extends JFrame implements ActionListener{
     private JFrame instructionsFrame;
-    private JButton backButton;
     private JPanel instructionPanel;
+    private JButton backButton;
 
     public instructionsPage(){
         instructionSetup();
