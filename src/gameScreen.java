@@ -224,7 +224,7 @@ public class gameScreen extends JFrame implements ActionListener{
                     JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
             // get player name
             player = nameBox.getText();
-        } while(choice != 0 || player.equals(""));
+        } while(choice != 0 || player.isEmpty());
 
         // go back to score screen
         JavaGUI display = new JavaGUI();
