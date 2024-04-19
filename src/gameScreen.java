@@ -10,7 +10,6 @@ import java.util.Collections;
 public class gameScreen extends javax.swing.JFrame implements ActionListener{
     private JFrame gameFrame;
     private JPanel gamePanel;
-    private JPanel collectionPanel;
     private JLabel scoreDisplay;
     private JMenuItem openInstructions;
     private JButton backButton;
@@ -18,7 +17,6 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     private JButton openedCard2;
     private ImageIcon openedIcon1;
     private ImageIcon openedIcon2;
-    private JTextField nameBox;
     private String player;
     private int matchResult;
     private int matchedPairs = 0;
@@ -146,7 +144,8 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
 
     private void cardClicked(JButton clickedButton){
         int index = cards.indexOf(clickedButton);
-        ImageIcon icon = cardIcons.get(index);
+        //ImageIcon icon = cardIcons.get(index);
+        ImageIcon icon = cardBack;
 
         // flips over first card when first card is clicked
         if(openedCard1 == null){
@@ -216,41 +215,16 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     }
 
     private void collectUserInfo(){
-        int choice = 1;
-
-        setCollectionComponents();
-
         // display dialog to user for data collection
+        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 24));
+        UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 22));
+        UIManager.put("TextField.font", new Font("Arial", Font.PLAIN, 24));
+
         do {
-            UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 22));
-            choice = JOptionPane.showOptionDialog(null, collectionPanel, "End",
-                    JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[] {"Confirm"}, null);
-            // get player name
-            player = nameBox.getText();
-        } while(choice != 0 || player.isEmpty());
+            player = JOptionPane.showInputDialog(null, "Player Name: ", "End", JOptionPane.PLAIN_MESSAGE);
+        }while(player == null || player.isEmpty());
+        System.out.print(player);
         new JavaGUI().openScores();
         gameFrame.dispose();
-    }
-
-    private void setCollectionComponents(){
-        // set up dialog panel for collecting data
-        collectionPanel = new JPanel(new BorderLayout());
-
-        // set panel components
-        JLabel nameText = new JLabel("Enter player name: ");
-        nameBox = new JTextField(15);;
-        JLabel scoreText = new JLabel("Score: " + trackScore);
-
-        scoreText.setBorder(new EmptyBorder(0,0,12,0));
-
-        // set fonts
-        nameText.setFont(new Font("Arial", Font.PLAIN, 24));
-        nameBox.setFont(new Font("Arial", Font.PLAIN, 24));
-        scoreText.setFont(new Font("Arial", Font.PLAIN, 24));
-
-        // add components to panel for display
-        collectionPanel.add(nameText, BorderLayout.CENTER);
-        collectionPanel.add(nameBox, BorderLayout.SOUTH);
-        collectionPanel.add(scoreText, BorderLayout.NORTH);
     }
 }
