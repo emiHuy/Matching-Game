@@ -226,8 +226,9 @@ public class gameScreen extends JFrame implements ActionListener{
             player = nameBox.getText();
         } while(choice != 0 || player.equals(""));
 
-        // go back to start screen
-        new JavaGUI();
+        // go back to score screen
+        JavaGUI display = new JavaGUI();
+        display.setScoresVisible();
         gameFrame.dispose();
     }
     private void setCollectionComponents(){

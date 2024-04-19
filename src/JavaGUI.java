@@ -66,6 +66,11 @@ public class JavaGUI extends JFrame implements ActionListener{
         gameCharRight.setIcon(new ImageIcon("game Character.png"));
     }
 
+    public void setScoresVisible(){
+        startScreen.setVisible(false);
+        scoresList.setVisible(true);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == playButton) {
@@ -80,8 +85,7 @@ public class JavaGUI extends JFrame implements ActionListener{
             new instructionsPage();
         }
         else if(e.getSource() == scoresButton) {
-            startScreen.setVisible(false);
-            scoresList.setVisible(true);
+            setScoresVisible();
         }
         else if(e.getSource() == backButtonAbout || e.getSource() == backButtonScores) {
             startScreen.setVisible(true);
