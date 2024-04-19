@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class instructionsPage extends JFrame implements ActionListener{
-    private JFrame instructions;
+    private JFrame instructionsFrame;
     private JButton backButton;
     private JPanel instructionPanel;
 
@@ -12,20 +12,20 @@ public class instructionsPage extends JFrame implements ActionListener{
     }
 
     private void instructionSetup(){
-        instructions = new JFrame();
-        instructions.add(instructionPanel);
-        instructions.setTitle("Card Matching Game Instructions");
-        instructions.setSize(1500, 700);
-        instructions.setLocationRelativeTo(null);
-        instructions.setVisible(true);
-        instructions.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        instructionsFrame = new JFrame();
+        instructionsFrame.add(instructionPanel);
+        instructionsFrame.setTitle("Card Matching Game Instructions");
+        instructionsFrame.setSize(1500, 700);
+        instructionsFrame.setLocationRelativeTo(null);
+        instructionsFrame.setVisible(true);
+        instructionsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         backButton.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backButton) {
-            instructions.dispose();
+            instructionsFrame.dispose();
         }
     }
 }

@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-import javax.swing.border.EmptyBorder;
 
 public class JavaGUI extends JFrame implements ActionListener{
     private JPanel mainPanel;
@@ -13,8 +12,6 @@ public class JavaGUI extends JFrame implements ActionListener{
     private JButton instructionsButton;
     private JButton quitButton;
     private JButton scoresButton;
-    private JLabel highScoreDisplay;
-    private JLabel highScoreValue;
     private JPanel aboutScreen;
     private JButton backButtonAbout;
     private JPanel scoresList;
@@ -25,13 +22,15 @@ public class JavaGUI extends JFrame implements ActionListener{
     private JFrame displayStart;
 
     public JavaGUI() {
-        addComponents();
+        initialize();
+        setupComponents();
     }
 
-    private void addComponents(){
+    private void initialize(){
         displayStart = new JFrame();
         displayStart.setSize(1900, 1000);
         displayStart.add(mainPanel);
+        displayStart.setContentPane(mainPanel);
         mainPanel.setVisible(true);
         displayStart.setTitle("Card Matching Game");
         displayStart.setVisible(true);
@@ -44,7 +43,9 @@ public class JavaGUI extends JFrame implements ActionListener{
         aboutScreen.setVisible(false);
         mainPanel.add(scoresList);
         scoresList.setVisible(false);
-
+    }
+    private void setupComponents(){
+        // set up buttons
         playButton.addActionListener(this);
         aboutButton.addActionListener(this);
         instructionsButton.addActionListener(this);
@@ -55,13 +56,14 @@ public class JavaGUI extends JFrame implements ActionListener{
         backButtonScores.addActionListener(this);
 
         scoreDisplay.setText("Score: " + 0);
+
+        // set up about screen
         aboutText.setText("Welcome to the Card Matching Game created by Emily and Keenan in 2024.\n\n" +
                 "With our Card Matching Game, we bring you endless fun to help you unwind after a long day.\n\n"+
                 "Play our game to test your cognitive abilities and enhance your memory.\n\n" +
                 "It's time to start matching! Good luck and have fun!");
         aboutText.setBorder(BorderFactory.createLineBorder(Color.WHITE, 4));
         gameCharRight.setIcon(new ImageIcon("game Character.png"));
-        displayStart.setContentPane(mainPanel);
     }
 
     @Override
@@ -75,7 +77,7 @@ public class JavaGUI extends JFrame implements ActionListener{
             aboutScreen.setVisible(true);
         }
         else if(e.getSource() == instructionsButton) {
-            JFrame instructions = new instructionsPage();
+            new instructionsPage();
         }
         else if(e.getSource() == scoresButton) {
             startScreen.setVisible(false);
@@ -89,9 +91,11 @@ public class JavaGUI extends JFrame implements ActionListener{
         // if quit button is clicked
         else {
             // ask user for confirmation to quit
-            UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 20));
-            UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 18));
-            int quitResponse = JOptionPane.showConfirmDialog(instructionsButton, "Are you sure you want to quit?", "Confirm Quit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 22));
+            UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 20));
+            int quitResponse = JOptionPane.showConfirmDialog(instructionsButton,
+                    "Are you sure you want to quit?", "Confirm Quit", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if(quitResponse == JOptionPane.YES_OPTION) {
                 // exit program if user confirms
                 displayStart.dispose();
