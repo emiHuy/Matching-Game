@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class gameScreen extends javax.swing.JFrame implements ActionListener{
+    // Tracks if instruction window is already opened.
+    public static boolean isInstructionsOpened = JavaGUI.isInstructionsOpened;
+
+    // GUI components.
     private JFrame gameFrame;
     private JPanel gamePanel;
     private JLabel scoreDisplay;
@@ -18,6 +22,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     private ImageIcon openedIcon1;
     private ImageIcon openedIcon2;
     private String player;
+    private instructionsPage instructions;
     private int matchResult;
     private int matchedPairs = 0;
     public int trackScore = 0;
@@ -44,6 +49,11 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         gameFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         gameFrame.setLocationRelativeTo(null);
 
+        if(isInstructionsOpened){
+            // Assign existing instruction window to game screen attribute.
+            instructions = Main.transferInstructionWindow();
+        }
+
         setupUI();
     }
 
@@ -51,13 +61,13 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         JPanel borderPanel = new JPanel(new BorderLayout());
         gameFrame.add(borderPanel);
 
-        // set up panel
+        // Set up game panel.
         gamePanel = new JPanel();
         gamePanel.setBackground(new Color(43, 53, 75));
         gamePanel.setLayout(new GridLayout(3,4,10,10));
         borderPanel.add(gamePanel, BorderLayout.CENTER);
 
-        // add back button
+        // Add back button.
         JPanel buttonPanel = new JPanel(new BorderLayout());
         backButton = new JButton("Back");
         backButton.addActionListener(this);
@@ -65,7 +75,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         buttonPanel.add(backButton, BorderLayout.EAST);
         borderPanel.add(buttonPanel,BorderLayout.SOUTH);
 
-        // add score display
+        // Add score display.
         scoreDisplay = new JLabel("Score: " + 0);
         scoreDisplay.setFont(new Font("Arial", Font.PLAIN, 28));
         buttonPanel.add(scoreDisplay, BorderLayout.WEST);
@@ -88,7 +98,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     }
 
     private void setupCards(){
-        // add card image icons to array
+        // Add card image icons to array.
         cardIcons.add(circleCard);
         cardIcons.add(circleCard);
         cardIcons.add(clubCard);
@@ -102,10 +112,10 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         cardIcons.add(starCard);
         cardIcons.add(starCard);
 
-        // shuffle card order
+        // Shuffle card order.
         Collections.shuffle(cardIcons);
 
-        // match cards to JButtons and display card backs to screen
+        // Match cards to JButtons and display card backs to screen.
         for(ImageIcon icon: cardIcons){
             JButton button = new JButton(cardBack);
             button.addActionListener(this);
@@ -114,21 +124,8 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         }
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == backButton) {
-            backButtonClicked();
-        }
-        else if(e.getSource() == openInstructions) {
-            new instructionsPage();
-        }
-        else {
-            cardClicked((JButton)e.getSource());
-        }
-    }
-
     private void backButtonClicked(){
-        // ask for user confirmation to leave game screen
+        // Ask for user confirmation to leave game screen.
         UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 22));
         UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 20));
         int confirmBack = JOptionPane.showConfirmDialog(null,
@@ -136,7 +133,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (confirmBack == JOptionPane.YES_OPTION){
-            // go back to starting menu
+            // Go back to starting menu if user confirms.
             gameFrame.dispose();
             Main.openInstanceDisplay();
         }
@@ -146,41 +143,40 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         int index = cards.indexOf(clickedButton);
         ImageIcon icon = cardIcons.get(index);
 
-        // flips over first card when first card is clicked
+        // Flips over first card when first card is clicked.
         if(openedCard1 == null){
             openedCard1 = clickedButton;
             openedIcon1 = icon;
             clickedButton.setIcon(icon);
             matchResult = 1;
         }
-        // flips over second card when second card is clicked
+        // Flips over second card when second card is clicked.
         else if(openedCard2 == null && clickedButton != openedCard1){
             openedCard2 = clickedButton;
             openedIcon2 = icon;
             clickedButton.setIcon(icon);
 
             if(openedIcon1.equals(openedIcon2)){
-                continueGame(true, "It's a MATCH!");
-            }
+                continueGame(true, "It's a MATCH!");}
             else{
-                continueGame(false, "Unlucky... try again.");
-            }
+                continueGame(false, "Unlucky... try again.");}
         }
     }
 
+    // After card is clicked,
     private void continueGame(boolean isMatch, String matchMsg){
         Object[] options = {"Continue"};
         UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 24));
         UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 22));
 
         while(matchResult != 0) {
-            // display match result message
+            // Display match result message
             matchResult = JOptionPane.showOptionDialog(null, matchMsg, "Is it a match?",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
 
-            // when user confirms to continue game, and cards are a match,
+            // When user confirms to continue game and cards match,
             if (matchResult == 0 && isMatch) {
-                // remove card icons from screen and add to score
+                // Remove card icons from screen and add to score.
                 openedCard1.setVisible(false);
                 openedCard2.setVisible(false);
                 openedCard1 = null;
@@ -190,14 +186,14 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
                 trackScore += 100;
                 matchedPairs++;
 
-                // when all card pairs are matched, display final score and ask for player name
+                // When all cards are matched.
                 if(matchedPairs == totalPairs){
                     collectUserInfo();
                 }
             }
-            // when user confirms to continue game, and cards are a match,
+            // When user confirms to continue game and cards don't match,
             else if (matchResult == 0 && !isMatch) {
-                // flip over cards to reveal back side (reset cards) and subtract from score
+                // Flip over cards to reveal back side/reset cards and subtract from score
                 openedCard1.setIcon(cardBack);
                 openedCard2.setIcon(cardBack);
                 openedCard1 = null;
@@ -208,22 +204,40 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
                     trackScore -= 10;
                 }
             }
-            // Updates Score
+            // Updates score display
             scoreDisplay.setText("Score: " + trackScore);
         }
     }
 
     private void collectUserInfo(){
-        // display dialog to user for data collection
         UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 24));
         UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 22));
         UIManager.put("TextField.font", new Font("Arial", Font.PLAIN, 24));
 
         do {
+            // Collect user input
             player = JOptionPane.showInputDialog(null, "Player Name: ", "End", JOptionPane.PLAIN_MESSAGE);
         }while(player == null || player.isEmpty());
-        System.out.print(player);
-        Main.openInstanceScores(player, trackScore);
+        Main.openInstanceScores(player.trim(), trackScore);
         gameFrame.dispose();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == backButton) {
+            backButtonClicked();
+        }
+        else if(e.getSource() == openInstructions) {
+            if(!isInstructionsOpened){
+                instructions = new instructionsPage();
+                isInstructionsOpened = true;
+            }
+            else{
+                instructions.frameToFront();
+            }
+        }
+        else {
+            cardClicked((JButton)e.getSource());
+        }
     }
 }

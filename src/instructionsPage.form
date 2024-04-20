@@ -5,7 +5,10 @@
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-921103"/>
+      <enabled value="true"/>
+    </properties>
     <border type="none"/>
     <children>
       <component id="73b7" class="javax.swing.JLabel">
@@ -35,7 +38,7 @@
         <properties>
           <editable value="false"/>
           <font size="20"/>
-          <text value="Welcome."/>
+          <text value="Instructions... "/>
         </properties>
       </component>
       <hspacer id="2b219">

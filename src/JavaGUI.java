@@ -3,15 +3,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.ImageIcon;
 
 public class JavaGUI extends JFrame implements ActionListener{
+    // Tracks if instructions window is already opened
+    public static boolean isInstructionsOpened = false;
+
+    // GUI components
     private JFrame displayStart;
     private JPanel mainPanel;
     private JPanel startScreen;
     private JPanel aboutScreen;
-    private JPanel scoresList;
+    private JPanel scoresScreen;
     private JButton playButton;
     private JButton aboutButton;
     private JButton instructionsButton;
@@ -22,6 +25,7 @@ public class JavaGUI extends JFrame implements ActionListener{
     private JLabel scoreDisplay;
     private JLabel gameCharRight;
     private JTextPane aboutText;
+    private instructionsPage instructions;
     private ArrayList<String> playerList = new ArrayList<>();
     private ArrayList<Integer> playerScoreList = new ArrayList<>();
 
@@ -45,11 +49,11 @@ public class JavaGUI extends JFrame implements ActionListener{
         startScreen.setVisible(true);
         mainPanel.add(aboutScreen);
         aboutScreen.setVisible(false);
-        mainPanel.add(scoresList);
-        scoresList.setVisible(false);
+        mainPanel.add(scoresScreen);
+        scoresScreen.setVisible(false);
     }
     private void setupComponents(){
-        // set up buttons
+        // Set up buttons
         playButton.addActionListener(this);
         aboutButton.addActionListener(this);
         instructionsButton.addActionListener(this);
@@ -61,7 +65,7 @@ public class JavaGUI extends JFrame implements ActionListener{
 
         scoreDisplay.setText("Score: " + 0);
 
-        // set up about screen
+        // Set up about screen
         aboutText.setText("Welcome to the Card Matching Game created by Emily and Keenan in 2024.\n\n" +
                 "With our Card Matching Game, we bring you endless fun to help you unwind after a long day.\n\n"+
                 "Play our game to test your cognitive abilities and enhance your memory.\n\n" +
@@ -73,13 +77,22 @@ public class JavaGUI extends JFrame implements ActionListener{
     public void openScores(String newPlayer, int newScore){
         initialize();
         startScreen.setVisible(false);
-        scoresList.setVisible(true);
+        scoresScreen.setVisible(true);
         playerList.add(newPlayer);
         playerScoreList.add(newScore);
+        System.out.println("Player: Score");
+        for(int i = 0 ; i < playerList.toArray().length; i++) {
+            System.out.println(playerList.get(i) + ": " + playerScoreList.get(i));
+        }
+        System.out.println("");
     }
 
     public void initializeGUI(){
         initialize();
+    }
+
+    public instructionsPage getInstructionWindow(){
+        return instructions;
     }
 
     @Override
@@ -93,16 +106,22 @@ public class JavaGUI extends JFrame implements ActionListener{
             aboutScreen.setVisible(true);
         }
         else if(e.getSource() == instructionsButton) {
-            new instructionsPage();
+            if(!isInstructionsOpened){
+                instructions = new instructionsPage();
+                isInstructionsOpened = true;
+            }
+            else{
+                instructions.frameToFront();
+            }
         }
         else if(e.getSource() == scoresButton) {
             startScreen.setVisible(false);
-            scoresList.setVisible(true);
+            scoresScreen.setVisible(true);
         }
         else if(e.getSource() == backButtonAbout || e.getSource() == backButtonScores) {
             startScreen.setVisible(true);
             aboutScreen.setVisible(false);
-            scoresList.setVisible(false);
+            scoresScreen.setVisible(false);
         }
         // if quit button is clicked
         else {
@@ -114,6 +133,7 @@ public class JavaGUI extends JFrame implements ActionListener{
                     JOptionPane.QUESTION_MESSAGE);
             if(quitResponse == JOptionPane.YES_OPTION) {
                 // exit program if user confirms
+                instructions.dispose();
                 displayStart.dispose();
             }
         }
