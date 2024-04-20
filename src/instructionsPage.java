@@ -25,9 +25,7 @@ public class instructionsPage extends JFrame implements ActionListener{
         instructionsFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e){
-                // Reset isInstructionOpened trackers when window is closed.
-                JavaGUI.isInstructionsOpened = false;
-                gameScreen.isInstructionsOpened = false;
+                closeWindow();
             }
         });
 
@@ -50,6 +48,13 @@ public class instructionsPage extends JFrame implements ActionListener{
                 "Enjoy the game and have fun!");
     }
 
+    // Resets isInstructionOpened trackers and closes instruction window.
+    public void closeWindow(){
+        instructionsFrame.dispose();
+        JavaGUI.isInstructionsOpened = false;
+        gameScreen.isInstructionsOpened = false;
+    }
+
     // Brings existing instruction window to front of screen.
     public void frameToFront(){
         instructionsFrame.setExtendedState(JFrame.NORMAL);
@@ -61,10 +66,7 @@ public class instructionsPage extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backButton) {
-            // Reset isInstructionOpened trackers when back button is clicked.
-            JavaGUI.isInstructionsOpened = false;
-            gameScreen.isInstructionsOpened = false;
-            instructionsFrame.dispose();
+            closeWindow();
         }
     }
 }
