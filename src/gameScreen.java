@@ -51,7 +51,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
 
         if(isInstructionsOpened){
             // Assign existing instruction window to game screen attribute.
-            instructions = Main.transferInstructionWindow();
+            instructions = Main.getInstructionWindow();
         }
 
         setupUI();
@@ -204,7 +204,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
                     trackScore -= 10;
                 }
             }
-            // Updates score display
+            // Updates score display.
             scoreDisplay.setText("Score: " + trackScore);
         }
     }
@@ -215,7 +215,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         UIManager.put("TextField.font", new Font("Arial", Font.PLAIN, 24));
 
         do {
-            // Collect user input
+            // Collect user's name.
             player = JOptionPane.showInputDialog(null, "Player Name: ", "End", JOptionPane.PLAIN_MESSAGE);
         }while(player == null || player.isEmpty());
         Main.openInstanceScores(player.trim(), trackScore);

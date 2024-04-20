@@ -26,6 +26,8 @@ public class JavaGUI extends JFrame implements ActionListener{
     private JLabel gameCharRight;
     private JTextPane aboutText;
     private instructionsPage instructions;
+
+    // Data for tracking players and scores.
     private ArrayList<String> playerList = new ArrayList<>();
     private ArrayList<Integer> playerScoreList = new ArrayList<>();
 
@@ -75,11 +77,15 @@ public class JavaGUI extends JFrame implements ActionListener{
     }
 
     public void openScores(String newPlayer, int newScore){
+        // Go to scores screen.
         initialize();
         startScreen.setVisible(false);
         scoresScreen.setVisible(true);
+
+        // Update player and score data.
         playerList.add(newPlayer);
         playerScoreList.add(newScore);
+
         System.out.println("Player: Score");
         for(int i = 0 ; i < playerList.toArray().length; i++) {
             System.out.println(playerList.get(i) + ": " + playerScoreList.get(i));
@@ -97,14 +103,19 @@ public class JavaGUI extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Go to game screen if play button is clicked.
         if(e.getSource() == playButton) {
             new gameScreen();
             displayStart.dispose();
         }
+
+        // Go to about screen if score button is clicked.
         else if(e.getSource() == aboutButton) {
             startScreen.setVisible(false);
             aboutScreen.setVisible(true);
         }
+
+        // Open instruction window if instructions button is clicked.
         else if(e.getSource() == instructionsButton) {
             if(!isInstructionsOpened){
                 instructions = new instructionsPage();
@@ -114,25 +125,31 @@ public class JavaGUI extends JFrame implements ActionListener{
                 instructions.frameToFront();
             }
         }
+
+        // Go to scores screen if scores button is clicked.
         else if(e.getSource() == scoresButton) {
             startScreen.setVisible(false);
             scoresScreen.setVisible(true);
         }
+
+        // Go to start screen if back button is clicked.
         else if(e.getSource() == backButtonAbout || e.getSource() == backButtonScores) {
             startScreen.setVisible(true);
             aboutScreen.setVisible(false);
             scoresScreen.setVisible(false);
         }
-        // if quit button is clicked
+
+        // If quit button is clicked,
         else {
-            // ask user for confirmation to quit
+            // ask user for confirmation to quit.
             UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 22));
             UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 20));
             int quitResponse = JOptionPane.showConfirmDialog(instructionsButton,
                     "Are you sure you want to quit?", "Confirm Quit", JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
+
             if(quitResponse == JOptionPane.YES_OPTION) {
-                // exit program if user confirms
+                // Exit program if user confirms.
                 instructions.dispose();
                 displayStart.dispose();
             }

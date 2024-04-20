@@ -30,6 +30,7 @@ public class instructionsPage extends JFrame implements ActionListener{
         });
     }
 
+    // Brings existing instruction window to front of screen.
     public void frameToFront(){
         instructionsFrame.setExtendedState(JFrame.NORMAL);
         instructionsFrame.setState(JFrame.NORMAL);

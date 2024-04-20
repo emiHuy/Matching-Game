@@ -8,7 +8,7 @@ public class Main {
     public static void openInstanceScores(String player, int score){
         display.openScores(player, score);}
 
-    public static instructionsPage transferInstructionWindow() {
+    public static instructionsPage getInstructionWindow() {
         return display.getInstructionWindow();}
 
     public static void main(String[] args) {
