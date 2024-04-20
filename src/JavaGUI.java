@@ -115,12 +115,14 @@ public class JavaGUI extends JFrame implements ActionListener{
             aboutScreen.setVisible(true);
         }
 
-        // Open instruction window if instructions button is clicked.
+        // If instructions button is clicked,
         else if(e.getSource() == instructionsButton) {
+            // Open instruction window if not already opened.
             if(!isInstructionsOpened){
                 instructions = new instructionsPage();
                 isInstructionsOpened = true;
             }
+            // If already opened, bring existing instruction window to the front center of screen.
             else{
                 instructions.frameToFront();
             }
