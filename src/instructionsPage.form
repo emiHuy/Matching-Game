@@ -61,7 +61,7 @@
           </grid>
         </constraints>
         <properties>
-          <background color="-921103"/>
+          <background color="-1579033"/>
           <editable value="false"/>
           <focusable value="true"/>
           <font size="24"/>
