@@ -135,11 +135,11 @@
             </constraints>
             <properties>
               <autoscrolls value="true"/>
-              <background color="-2960424"/>
+              <background color="-921103"/>
               <editable value="false"/>
               <font size="26"/>
               <foreground color="-14539738"/>
-              <margin top="10" left="20" bottom="10" right="20"/>
+              <margin top="15" left="20" bottom="10" right="20"/>
               <text value=""/>
             </properties>
           </component>
