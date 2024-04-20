@@ -1,31 +1,50 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class instructionsPage extends JFrame implements ActionListener{
-    private JFrame instructions;
-    private JButton backButton;
+    private JFrame instructionsFrame;
     private JPanel instructionPanel;
+    private JButton backButton;
 
     public instructionsPage(){
         instructionSetup();
     }
 
     private void instructionSetup(){
-        instructions = new JFrame();
-        instructions.add(instructionPanel);
-        instructions.setTitle("Card Matching Game Instructions");
-        instructions.setSize(1500, 700);
-        instructions.setLocationRelativeTo(null);
-        instructions.setVisible(true);
-        instructions.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        instructionsFrame = new JFrame();
+        instructionsFrame.add(instructionPanel);
+        instructionsFrame.setTitle("Card Matching Game Instructions");
+        instructionsFrame.setSize(1500, 700);
+        instructionsFrame.setLocationRelativeTo(null);
+        instructionsFrame.setVisible(true);
+        instructionsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         backButton.addActionListener(this);
+
+        instructionsFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e){
+                // Reset isInstructionOpened trackers when window is closed.
+                JavaGUI.isInstructionsOpened = false;
+                gameScreen.isInstructionsOpened = false;
+            }
+        });
+    }
+
+    // Brings existing instruction window to front of screen.
+    public void frameToFront(){
+        instructionsFrame.setExtendedState(JFrame.NORMAL);
+        instructionsFrame.setState(JFrame.NORMAL);
+        instructionsFrame.setLocationRelativeTo(null);
+        instructionsFrame.toFront();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backButton) {
-            instructions.dispose();
+            // Reset isInstructionOpened trackers when back button is clicked.
+            JavaGUI.isInstructionsOpened = false;
+            gameScreen.isInstructionsOpened = false;
+            instructionsFrame.dispose();
         }
     }
 }
