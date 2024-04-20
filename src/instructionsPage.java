@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class instructionsPage extends JFrame implements ActionListener{
@@ -21,6 +22,15 @@ public class instructionsPage extends JFrame implements ActionListener{
         instructionsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         backButton.addActionListener(this);
 
+        instructionsFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e){
+                // Reset isInstructionOpened trackers when window is closed.
+                JavaGUI.isInstructionsOpened = false;
+                gameScreen.isInstructionsOpened = false;
+            }
+        });
+
         instructionText.setText("Welcome to the Card Matching Game!\n\n" +
                 "Objective:\n" +
                 "The goal of this game is to match all pairs of cards on the board.\n\n" +
@@ -38,15 +48,6 @@ public class instructionsPage extends JFrame implements ActionListener{
                 "- Keep track of your score - try to maximize it by minimizing failed attempts.\n" +
                 "         - The max score achievable is 600 points.\n\n" +
                 "Enjoy the game and have fun!");
-
-        instructionsFrame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e){
-                // Reset isInstructionOpened trackers when window is closed.
-                JavaGUI.isInstructionsOpened = false;
-                gameScreen.isInstructionsOpened = false;
-            }
-        });
     }
 
     // Brings existing instruction window to front of screen.

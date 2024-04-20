@@ -72,7 +72,6 @@ public class JavaGUI extends JFrame implements ActionListener{
                 "With our Card Matching Game, we bring you endless fun to help you unwind after a long day.\n\n"+
                 "Play our game to test your cognitive abilities and enhance your memory.\n\n" +
                 "It's time to start matching! Good luck and have fun!");
-        aboutText.setBorder(BorderFactory.createLineBorder(new Color(128, 130, 150), 4));
         gameCharRight.setIcon(new ImageIcon("game Character.png"));
     }
 
