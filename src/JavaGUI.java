@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
@@ -53,6 +55,17 @@ public class JavaGUI extends JFrame implements ActionListener{
         aboutScreen.setVisible(false);
         mainPanel.add(scoresScreen);
         scoresScreen.setVisible(false);
+
+        displayStart.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // If user escapes window and instructions are opened,
+                if (isInstructionsOpened) {
+                    // Close instruction window.
+                    instructions.closeWindow();
+                }
+            }
+        });
     }
     private void setupComponents(){
         // Set up buttons
@@ -151,7 +164,9 @@ public class JavaGUI extends JFrame implements ActionListener{
 
             if(quitResponse == JOptionPane.YES_OPTION) {
                 // Exit program if user confirms.
-                instructions.dispose();
+                if(isInstructionsOpened) {
+                    instructions.closeWindow();
+                }
                 displayStart.dispose();
             }
         }

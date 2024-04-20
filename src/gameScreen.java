@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -49,12 +51,23 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         gameFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         gameFrame.setLocationRelativeTo(null);
 
+        setupUI();
+
         if(isInstructionsOpened){
             // Assign existing instruction window to game screen attribute.
             instructions = Main.getInstructionWindow();
         }
 
-        setupUI();
+        gameFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // If user escapes window and instructions are opened,
+                if (isInstructionsOpened) {
+                    // Close instruction window.
+                    instructions.closeWindow();
+                }
+            }
+        });
     }
 
     private void setupUI(){
@@ -134,6 +147,9 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
 
         if (confirmBack == JOptionPane.YES_OPTION){
             // Go back to starting menu if user confirms.
+            if(isInstructionsOpened) {
+                instructions.closeWindow();
+            }
             gameFrame.dispose();
             Main.openInstanceDisplay();
         }
@@ -219,6 +235,9 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
             player = JOptionPane.showInputDialog(null, "Player Name: ", "End", JOptionPane.PLAIN_MESSAGE);
         }while(player == null || player.isEmpty());
         Main.openInstanceScores(player.trim(), trackScore);
+        if(isInstructionsOpened) {
+            instructions.closeWindow();
+        }
         gameFrame.dispose();
     }
 
