@@ -26,6 +26,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     private instructionsPage instructions;
     private int matchResult;
     private int matchedPairs = 0;
+    private int failedMatches = 0;
     public int trackScore = 0;
     private final ArrayList<JButton> cards = new ArrayList<>();
     private final ArrayList<ImageIcon> cardIcons = new ArrayList<>();
@@ -217,6 +218,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
                 openedIcon1 = null;
                 openedCard2 = null;
                 openedIcon2 = null;
+                failedMatches++;
                 if(trackScore > 0) {
                     trackScore -= 10;
                 }

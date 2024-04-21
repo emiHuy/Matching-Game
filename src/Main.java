@@ -2,8 +2,7 @@ public class Main {
     private static JavaGUI display;
 
     public static void openInstanceDisplay(){
-        display.initializeGUI();
-    }
+        display.initializeGUI();}
 
     public static void openInstanceScores(String player, int score){
         display.openScores(player, score);}
@@ -12,6 +11,5 @@ public class Main {
         return display.getInstructionWindow();}
 
     public static void main(String[] args) {
-        display = new JavaGUI();
-    }
+        display = new JavaGUI();}
 }

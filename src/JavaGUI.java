@@ -4,8 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class JavaGUI extends JFrame implements ActionListener{
     // Tracks if instructions window is already opened
@@ -27,6 +30,7 @@ public class JavaGUI extends JFrame implements ActionListener{
     private JLabel scoreDisplay;
     private JLabel gameCharRight;
     private JTextPane aboutText;
+    private JTable scoresTable;
     private instructionsPage instructions;
 
     // Data for tracking players and scores.
@@ -86,6 +90,20 @@ public class JavaGUI extends JFrame implements ActionListener{
                 "Play our game to test your cognitive abilities and enhance your memory.\n\n" +
                 "It's time to start matching! Good luck and have fun!");
         gameCharRight.setIcon(new ImageIcon("game Character.png"));
+
+        createScoresTable();
+    }
+    public void createScoresTable(){
+        Object[][] data = new Object[playerList.size()][2];
+        for(int x = 0; x < playerList.size(); x++){
+            data[x][0] = playerList.get(x);
+            data[x][1] = playerScoreList.get(x);
+        }
+        Arrays.sort(data, Comparator.comparing(row -> (int)row[1]));
+
+        scoresTable.setModel(new DefaultTableModel(data, new String[]{"Player", "Score"}));
+        JTableHeader header = scoresTable.getTableHeader();
+        header.setFont(new Font("Arial", Font.BOLD, 26));
     }
 
     public void openScores(String newPlayer, int newScore){
@@ -98,11 +116,7 @@ public class JavaGUI extends JFrame implements ActionListener{
         playerList.add(newPlayer);
         playerScoreList.add(newScore);
 
-        System.out.println("Player: Score");
-        for(int i = 0 ; i < playerList.toArray().length; i++) {
-            System.out.println(playerList.get(i) + ": " + playerScoreList.get(i));
-        }
-        System.out.println();
+        createScoresTable();
     }
 
     public void initializeGUI(){
