@@ -11,7 +11,7 @@ import java.util.Collections;
 
 public class gameScreen extends javax.swing.JFrame implements ActionListener{
     // Tracks if instruction window is already opened.
-    public static boolean isInstructionsOpened = JavaGUI.isInstructionsOpened;
+    public static boolean isInstructionsOpened;
 
     // GUI components.
     private JFrame gameFrame;
@@ -23,12 +23,11 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     private JButton openedCard2;
     private ImageIcon openedIcon1;
     private ImageIcon openedIcon2;
-    private String player;
     private instructionsPage instructions;
     private int matchResult;
     private int matchedPairs = 0;
+    private int failedMatches = 0;
     public int trackScore = 0;
-    private final int totalPairs = 6;
     private final ArrayList<JButton> cards = new ArrayList<>();
     private final ArrayList<ImageIcon> cardIcons = new ArrayList<>();
     private final ImageIcon cardBack = new ImageIcon("cardback.png");
@@ -53,6 +52,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
 
         setupUI();
 
+        isInstructionsOpened = JavaGUI.isInstructionsOpened;
         if(isInstructionsOpened){
             // Assign existing instruction window to game screen attribute.
             instructions = Main.getInstructionWindow();
@@ -186,6 +186,8 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
         UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 22));
 
         while(matchResult != 0) {
+            int totalPairs = 6;
+
             // Display match result message
             matchResult = JOptionPane.showOptionDialog(null, matchMsg, "Is it a match?",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
@@ -208,7 +210,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
                 }
             }
             // When user confirms to continue game and cards don't match,
-            else if (matchResult == 0 && !isMatch) {
+            else {
                 // Flip over cards to reveal back side/reset cards and subtract from score
                 openedCard1.setIcon(cardBack);
                 openedCard2.setIcon(cardBack);
@@ -216,6 +218,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
                 openedIcon1 = null;
                 openedCard2 = null;
                 openedIcon2 = null;
+                failedMatches++;
                 if(trackScore > 0) {
                     trackScore -= 10;
                 }
@@ -226,6 +229,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     }
 
     private void collectUserInfo(){
+        String player;
         UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 24));
         UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 22));
         UIManager.put("TextField.font", new Font("Arial", Font.PLAIN, 24));

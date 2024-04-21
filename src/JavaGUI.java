@@ -4,8 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class JavaGUI extends JFrame implements ActionListener{
     // Tracks if instructions window is already opened
@@ -24,14 +27,14 @@ public class JavaGUI extends JFrame implements ActionListener{
     private JButton scoresButton;
     private JButton backButtonAbout;
     private JButton backButtonScores;
-    private JLabel scoreDisplay;
     private JLabel gameCharRight;
     private JTextPane aboutText;
+    private JTable scoresTable;
     private instructionsPage instructions;
 
     // Data for tracking players and scores.
-    private ArrayList<String> playerList = new ArrayList<>();
-    private ArrayList<Integer> playerScoreList = new ArrayList<>();
+    private final ArrayList<String> playerList = new ArrayList<>();
+    private final ArrayList<Integer> playerScoreList = new ArrayList<>();
 
     public JavaGUI() {
         initialize();
@@ -78,14 +81,27 @@ public class JavaGUI extends JFrame implements ActionListener{
         backButtonAbout.addActionListener(this);
         backButtonScores.addActionListener(this);
 
-        scoreDisplay.setText("Score: " + 0);
-
         // Set up about screen
         aboutText.setText("Welcome to the Card Matching Game created by Emily and Keenan in 2024.\n\n" +
                 "With our Card Matching Game, we bring you endless fun to help you unwind after a long day.\n\n"+
                 "Play our game to test your cognitive abilities and enhance your memory.\n\n" +
                 "It's time to start matching! Good luck and have fun!");
         gameCharRight.setIcon(new ImageIcon("game Character.png"));
+
+        createScoresTable();
+    }
+    public void createScoresTable(){
+        Object[][] data = new Object[playerList.size()][2];
+        for(int x = 0; x < playerList.size(); x++){
+            data[x][0] = playerList.get(x);
+            data[x][1] = playerScoreList.get(x);
+        }
+        Arrays.sort(data, Comparator.comparing(row -> (int)row[1]));
+
+        // Creates table
+        scoresTable.setModel(new DefaultTableModel(data, new String[]{"Player", "Score"}));
+        JTableHeader header = scoresTable.getTableHeader();
+        header.setFont(new Font("Arial", Font.BOLD, 26));
     }
 
     public void openScores(String newPlayer, int newScore){
@@ -98,11 +114,7 @@ public class JavaGUI extends JFrame implements ActionListener{
         playerList.add(newPlayer);
         playerScoreList.add(newScore);
 
-        System.out.println("Player: Score");
-        for(int i = 0 ; i < playerList.toArray().length; i++) {
-            System.out.println(playerList.get(i) + ": " + playerScoreList.get(i));
-        }
-        System.out.println("");
+        createScoresTable();
     }
 
     public void initializeGUI(){
@@ -131,8 +143,8 @@ public class JavaGUI extends JFrame implements ActionListener{
         else if(e.getSource() == instructionsButton) {
             // Open instruction window if not already opened.
             if(!isInstructionsOpened){
-                instructions = new instructionsPage();
                 isInstructionsOpened = true;
+                instructions = new instructionsPage();
             }
             // If already opened, bring existing instruction window to the front center of screen.
             else{
