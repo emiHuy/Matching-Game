@@ -91,15 +91,26 @@ public class JavaGUI extends JFrame implements ActionListener{
         createScoresTable();
     }
     public void createScoresTable(){
+        // Add player data to 2D list.
         Object[][] data = new Object[playerList.size()][2];
         for(int x = 0; x < playerList.size(); x++){
             data[x][0] = playerList.get(x);
             data[x][1] = playerScoreList.get(x);
         }
+
+        // Sort data by score.
         Arrays.sort(data, Comparator.comparing(row -> (int)row[1]));
 
-        // Creates table
-        scoresTable.setModel(new DefaultTableModel(data, new String[]{"Player", "Score"}));
+        // Create new sorted player data list and add rankings.
+        int rank = 1;
+        Object[][] sortedData = new Object[playerList.size()][3];
+        for(int x = 0; x < playerList.size(); x++){
+            sortedData[x][0] = rank++;
+            sortedData[x][1] = data[playerList.size()-1-x][0];
+            sortedData[x][2] = data[playerList.size()-1-x][1];
+        }
+        // Creates table with headers and data.
+        scoresTable.setModel(new DefaultTableModel(sortedData, new String[]{"Rank", "Player", "Score"}));
         JTableHeader header = scoresTable.getTableHeader();
         header.setFont(new Font("Arial", Font.BOLD, 26));
     }

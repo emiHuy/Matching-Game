@@ -206,6 +206,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
 
                 // When all cards are matched.
                 if(matchedPairs == totalPairs){
+                    scoreDisplay.setText("Score: " + trackScore);
                     collectUserInfo();
                 }
             }
