@@ -11,7 +11,7 @@ import java.util.Collections;
 
 public class gameScreen extends javax.swing.JFrame implements ActionListener{
     // Tracks if instruction window is already opened.
-    public static boolean isInstructionsOpened = JavaGUI.isInstructionsOpened;
+    public static boolean isInstructionsOpened;
 
     // GUI components.
     private JFrame gameFrame;
@@ -53,6 +53,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
 
         setupUI();
 
+        isInstructionsOpened = JavaGUI.isInstructionsOpened;
         if(isInstructionsOpened){
             // Assign existing instruction window to game screen attribute.
             instructions = Main.getInstructionWindow();
@@ -208,7 +209,7 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
                 }
             }
             // When user confirms to continue game and cards don't match,
-            else if (matchResult == 0 && !isMatch) {
+            else {
                 // Flip over cards to reveal back side/reset cards and subtract from score
                 openedCard1.setIcon(cardBack);
                 openedCard2.setIcon(cardBack);

@@ -131,8 +131,8 @@ public class JavaGUI extends JFrame implements ActionListener{
         else if(e.getSource() == instructionsButton) {
             // Open instruction window if not already opened.
             if(!isInstructionsOpened){
-                instructions = new instructionsPage();
                 isInstructionsOpened = true;
+                instructions = new instructionsPage();
             }
             // If already opened, bring existing instruction window to the front center of screen.
             else{
