@@ -27,7 +27,6 @@ public class JavaGUI extends JFrame implements ActionListener{
     private JButton scoresButton;
     private JButton backButtonAbout;
     private JButton backButtonScores;
-    private JLabel scoreDisplay;
     private JLabel gameCharRight;
     private JTextPane aboutText;
     private JTable scoresTable;
@@ -82,8 +81,6 @@ public class JavaGUI extends JFrame implements ActionListener{
         backButtonAbout.addActionListener(this);
         backButtonScores.addActionListener(this);
 
-        scoreDisplay.setText("Score: " + 0);
-
         // Set up about screen
         aboutText.setText("Welcome to the Card Matching Game created by Emily and Keenan in 2024.\n\n" +
                 "With our Card Matching Game, we bring you endless fun to help you unwind after a long day.\n\n"+
@@ -101,6 +98,7 @@ public class JavaGUI extends JFrame implements ActionListener{
         }
         Arrays.sort(data, Comparator.comparing(row -> (int)row[1]));
 
+        // Creates table
         scoresTable.setModel(new DefaultTableModel(data, new String[]{"Player", "Score"}));
         JTableHeader header = scoresTable.getTableHeader();
         header.setFont(new Font("Arial", Font.BOLD, 26));
