@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.*;
-import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -90,6 +89,7 @@ public class JavaGUI extends JFrame implements ActionListener{
 
         createScoresTable();
     }
+
     public void createScoresTable(){
         // Add player data to 2D list.
         Object[][] data = new Object[playerList.size()][2];
@@ -109,6 +109,7 @@ public class JavaGUI extends JFrame implements ActionListener{
             sortedData[x][1] = data[playerList.size()-1-x][0];
             sortedData[x][2] = data[playerList.size()-1-x][1];
         }
+
         // Creates table with headers and data.
         scoresTable.setModel(new DefaultTableModel(sortedData, new String[]{"Rank", "Player", "Score"}));
         JTableHeader header = scoresTable.getTableHeader();
