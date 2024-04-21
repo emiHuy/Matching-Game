@@ -30,8 +30,8 @@ public class JavaGUI extends JFrame implements ActionListener{
     private instructionsPage instructions;
 
     // Data for tracking players and scores.
-    private ArrayList<String> playerList = new ArrayList<>();
-    private ArrayList<Integer> playerScoreList = new ArrayList<>();
+    private final ArrayList<String> playerList = new ArrayList<>();
+    private final ArrayList<Integer> playerScoreList = new ArrayList<>();
 
     public JavaGUI() {
         initialize();
@@ -102,7 +102,7 @@ public class JavaGUI extends JFrame implements ActionListener{
         for(int i = 0 ; i < playerList.toArray().length; i++) {
             System.out.println(playerList.get(i) + ": " + playerScoreList.get(i));
         }
-        System.out.println("");
+        System.out.println();
     }
 
     public void initializeGUI(){
