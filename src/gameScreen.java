@@ -26,7 +26,6 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
     private instructionsPage instructions;
     private int matchResult;
     private int matchedPairs = 0;
-    private int failedMatches = 0;
     public int trackScore = 0;
     private final ArrayList<JButton> cards = new ArrayList<>();
     private final ArrayList<ImageIcon> cardIcons = new ArrayList<>();
@@ -150,8 +149,8 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
             if(isInstructionsOpened) {
                 instructions.closeWindow();
             }
-            gameFrame.dispose();
             Main.openInstanceDisplay();
+            gameFrame.dispose();
         }
     }
 
@@ -181,49 +180,50 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
 
     // After card is clicked,
     private void continueGame(boolean isMatch, String matchMsg){
+        int totalPairs = 6;
+
         Object[] options = {"Continue"};
         UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 24));
         UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 22));
 
         while(matchResult != 0) {
-            int totalPairs = 6;
-
             // Display match result message
             matchResult = JOptionPane.showOptionDialog(null, matchMsg, "Is it a match?",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+        }
 
-            // When user confirms to continue game and cards match,
-            if (matchResult == 0 && isMatch) {
-                // Remove card icons from screen and add to score.
-                openedCard1.setVisible(false);
-                openedCard2.setVisible(false);
-                openedCard1 = null;
-                openedIcon1 = null;
-                openedCard2 = null;
-                openedIcon2 = null;
-                trackScore += 100;
-                matchedPairs++;
+        // When user confirms to continue game and cards match,
+        if (matchResult == 0 && isMatch) {
+            // Remove card icons from screen and add to score.
+            openedCard1.setVisible(false);
+            openedCard2.setVisible(false);
+            openedCard1 = null;
+            openedIcon1 = null;
+            openedCard2 = null;
+            openedIcon2 = null;
+            trackScore += 100;
+            matchedPairs++;
 
-                // When all cards are matched.
-                if(matchedPairs == totalPairs){
-                    scoreDisplay.setText("Score: " + trackScore);
-                    collectUserInfo();
-                }
+            // When all cards are matched.
+            if(matchedPairs == totalPairs){
+                scoreDisplay.setText("Score: " + trackScore);
+                collectUserInfo();
             }
-            // When user confirms to continue game and cards don't match,
-            else {
-                // Flip over cards to reveal back side/reset cards and subtract from score
-                openedCard1.setIcon(cardBack);
-                openedCard2.setIcon(cardBack);
-                openedCard1 = null;
-                openedIcon1 = null;
-                openedCard2 = null;
-                openedIcon2 = null;
-                failedMatches++;
-                if(trackScore > 0) {
-                    trackScore -= 10;
-                }
+        }
+
+        // When user confirms to continue game and cards don't match,
+        else if (matchResult == 0 && !isMatch){
+            // Flip over cards to reveal back side/reset cards and subtract from score
+            openedCard1.setIcon(cardBack);
+            openedCard2.setIcon(cardBack);
+            openedCard1 = null;
+            openedIcon1 = null;
+            openedCard2 = null;
+            openedIcon2 = null;
+            if(trackScore > 0) {
+                trackScore -= 10;
             }
+
             // Updates score display.
             scoreDisplay.setText("Score: " + trackScore);
         }
