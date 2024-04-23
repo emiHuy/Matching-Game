@@ -223,10 +223,9 @@ public class gameScreen extends javax.swing.JFrame implements ActionListener{
             if(trackScore > 0) {
                 trackScore -= 10;
             }
-
-            // Updates score display.
-            scoreDisplay.setText("Score: " + trackScore);
         }
+        // Updates score display.
+        scoreDisplay.setText("Score: " + trackScore);
     }
 
     private void collectUserInfo(){
